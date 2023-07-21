@@ -66,19 +66,12 @@ function Validator(formSelector) {
         }
         function handleValidate(e) {
             var rules = formRules[e.target.name]
+            console.log(rules)
             var errorMessage
             var input = e.target
             for(var rule of rules) {
                 switch(e.target.type) {
                     case 'radio':
-                        var radios = document.getElementsByName(e.target.name);
-                        for (var i = 0; i < radios.length; i++) { 
-                            errorMessage = rule(radios[i].checked)
-                            if (radios[i].checked) { 
-                                break
-                            }
-                        }
-                        break
                     case 'checkbox':
                         var radios = document.getElementsByName(e.target.name);
                         for (var i = 0; i < radios.length; i++) { 
@@ -132,19 +125,7 @@ function Validator(formSelector) {
             if(isValid) { //nếu có lỗi
                 isFormValid = false
             }
-            // if (input.type === 'checkbox' || input.type === 'radio') {
-            //     if (input.matches(':checked')) {
-            //         handleClearError({ target: input })
-            //     }
-            // }
         }
-        // for(var input of inputs) {
-        //     if (input.type != 'checkbox' && input.type != 'radio') {
-        //         if (!handleValidate({target: input})) {
-        //             isFormValid = true
-        //         }
-        //     }
-        // }
         console.log(isFormValid)
         if(isFormValid) {
             if(typeof _this.onSubmit == 'function') {
@@ -153,6 +134,8 @@ function Validator(formSelector) {
                     switch(input.type) {
                         case 'radio':
                             if(input.matches(':checked')){
+                                // var key = 'haha'
+                                // values.key = input.value
                                 values[input.name] = input.value
                             } 
                             break
